@@ -32,22 +32,21 @@ document.write(topic)
 
 
 /// Using VAR in for loop
-var div,
-    container = document.getElementById('container')
+// var div,
+//     container = document.getElementById('container')
 
-for (var i=0; i<5; i++) {
-    // declaring i in for loop creates a global variable named i..., then it iterates until 5
-    // when you click on ".onclick" the boxes, the global variable always reads "5" 
-    // because it's the globally declared variable as a result of using "var"
-    div = document.createElement('div')
-    console.log('div')
-    div.onclick = function() {
-        alert('This is box #' + i)
-    }
-    container.appendChild(div)
-}
+// for (var i=0; i<5; i++) {
+//     // declaring i in for loop creates a global variable named i..., then it iterates until 5
+//     // when you click on ".onclick" the boxes, the global variable always reads "5" 
+//     // because it's the globally declared variable as a result of using "var"
+//     div = document.createElement('div')
+//     console.log(div)
+//     div.onclick = function() {
+//         alert('This is box #' + i)
+//     }
+//     container.appendChild(div)
+// }
 
-// console.log
 
 /// Using LET in for loop ES6
 var div,
@@ -57,10 +56,10 @@ for (let i=0; i<5; i++) {
 // Declaring i in for loop  wit LET blocks off the scope of i.
 // when you click on ".onclick" the boxes, LET variable shows the value for i [INDEX] as scoped within loop iteration 
 
-div = document.createElement('div')
-console.log('div')
-div.onclick = function() {
-    alert('This is box #' + i)
+    div = document.createElement('div')
+    console.log(div)
+    div.onclick = function() {
+        alert('This is box #' + i)
 }
 container.appendChild(div)
 }
@@ -115,6 +114,32 @@ document.body.innerHTML =
 </section>
 `
 
+// function logActivity(name="", activity=""){
+//     console.log(`${name} loves ${favActivity}`)
 
+// function logActivity(p=defaultPerson) {
 
+//     let defaultPerson = {
+//         name: {
+//             first: "Shazam",
+//             last: "Wazah!"
+//         }, 
+//         favActivity: "Magic shows"
+//         }
+//         console.log(`${p.name.first} loves ${favActivity}`)        
+//     }
+// console.log(logActivity());
 
+// Arrow functions
+// traditional function
+
+var lordify = function(firstname) {
+    return `${firstName} of Cantebury`
+}
+
+console.log(lordify("Bubs"))
+console.log(lordify("Bimba"))
+
+// Using the arrow function => {return value}
+var lordify = firstname => `${firstname} of Cantebury`
+console.log(lordify("Sempliciotto"))
