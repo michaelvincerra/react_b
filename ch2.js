@@ -143,3 +143,35 @@ console.log(lordify("Bimba"))
 // Using the arrow function => {return value}
 var lordify = firstname => `${firstname} of Cantebury`
 console.log(lordify("Sempliciotto"))
+
+// New use of Arrow function
+var lordify = (firstName, land) => `${firstName} of ${land}`
+console.log(lordify("Bugs", "Balookaville"))
+console.log(lordify("Pepe Le Piu'", "Parigi"))
+
+// New use of Arrow function
+var _lordify = (firstName, land) => {
+    if (!firstName) {
+        throw new Error('A first name is required to lordify!')
+    }
+    if (!land) {
+        throw new Error('Every lord must have a land!')
+    }
+    return `${firstName} of ${land}`
+}
+console.log(lordify("Bart", "Simpsonville"))
+console.log(lordify("MonAmi", ))
+
+// Arrow functions do not block off scope of "this"
+
+var tahoe = {
+    resorts: ["Kirkwood", "Squaw", "Alpine"],
+    print: function(delay=1000) {
+
+        setTimeout(() => {
+            console.log(this === window)
+            console.log(this.resorts.join(", ")) 
+        }, delay)
+    }
+}
+tahoe.print();
