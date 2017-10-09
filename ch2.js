@@ -200,5 +200,19 @@ var regularPerson = {
 lordify(regularPerson)
 
 // Object literal enhancement: Opposite of Destructuring
+// Grab variables from the Global scope and put them back together as an object.
 
-var name
+// var name = "Larch Mountain"
+// var elevation = 4062
+// var funHike = {name, elevation}
+// console.log(funHike)
+
+
+// NOTE: We use 'this' to access the OBJECT keys.
+var name = "Hood"
+var elevation = 11250
+var print = function() {
+    console.log(`Mt. ${this.name} is ${this.elevation} feet tall.`)
+}
+var funHike = {name, elevation, print}
+funHike.print() 
