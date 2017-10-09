@@ -1,30 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+        Chapter 2: ES6
+        </title>
+        <style media="screen">
+        #container {
+            display: flex;
+            justify-content: space-around;
+        }
+        #container div {
+            height: 5em;
+            width: 5em;
+            background-color: purple;
+        }
+        </style>
+        <!-- This CDN is necessary for transpiling from ES6 to ES5 
+        Browser does the transpiling at runtime. NOT USED FOR PRODUCTION!-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+    </head>
+            <body>
+
+                <h1>Ch2 Examples</h1>
+                    <h1>Click on a Box</h1>
+
+                <div id="container"></div>
+
+
+                <script src="ch2.js"></script>
+                
+            </body>
+</html>
+
+
+<!-- This is taken directly from Eve Porcello, the author's, sample. It does not show the divs -->
+<!-- <!DOCTYPE html>
 <html>
 <head>
-    <title>
-    Chapter 2: ES6
-    </title>
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no"/>
+    <meta charset="utf-8">
     <style media="screen">
       #container {
           display: flex;
           justify-content: space-around;
       }
-      #container div {
+      #container>div {
           height: 5em;
           width: 5em;
           background-color: purple;
       }
     </style>
+    <title>Let</title>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
-    <body>
+<body>
+  <h1>Click on a Box</h1>
+  <div id="container"></div>
 
-        <h1>Ch2 Examples</h1>
-            <h1>Click on a Box</h1>
-
-        <div id="container"></div>
-
-
-    <script src="ch2.js"></script>
-        
-    </body>
-</html>
-
+<script type="text/babel">
+  // Solution, lexical variable scope
+  var div,
+      container = document.getElementById('container')
+  for (let i=0; i<5; i++) {
+    div = document.createElement('div')
+    div.onclick = function() {
+      alert('This is box #' + i)
+    }
+    container.appendChild(div)
+  }
+</script>
+</body>
+</html> -->

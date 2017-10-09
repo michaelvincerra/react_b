@@ -20,15 +20,15 @@
 
 // ES6 JavaScript
 // Using let protects the value of the global variable:
-var topic = "JavaScript"
+// var topic = "JavaScript"
 
-if(topic){
-    let topic = "React"
-    console.log('block scope: ', topic)
-}
+// if(topic){
+//     let topic = "React"
+//     console.log('block scope: ', topic)
+// }
 
-console.log('global scope: ', topic)
-document.write(topic)
+// console.log('global scope: ', topic)
+// document.write(topic)
 
 
 /// Using VAR in for loop
@@ -64,55 +64,53 @@ for (let i=0; i<5; i++) {
 container.appendChild(div)
 }
 
-// Template literal uses ticks and variables as: `...${word}`
-let lastName = "Lugosi"
-let firstName = "Bela"
-console.log(`Bauhaus sang: ${firstName} ${lastName} is dead.`)
+// // Template literal uses ticks and variables as: `...${word}`
+// let lastName = "Lugosi"
+// let firstName = "Bela"
+// console.log(`Bauhaus sang: ${firstName} ${lastName} is dead.`)
 
-// function concertTickets() { 
  
-    let qty = 2
-    const price = parseInt(20.00)
-    const event = "Bauhaus Concert"
-    const ticketAgent = "Count Dracula"
+// FIND the ERROR in the following template literal
+//     let qty = 2
+//     const price = parseInt(20.00)
+//     const event = "Bauhaus Concert"
+//     const ticketAgent = "Count Dracula"
 
-    let message = 
-    `
-    Hello ${firstName}, 
+//     `
+//     Hello ${firstName}, 
 
-    Thanks for ordering ${qty} tickets to the ${event}. 
+//     Thanks for ordering ${qty} tickets to the ${event}. 
 
-    Order details:
-    ${firstName}${lastName}
-    ${qty} * $${price} = $${qty*price} to ${event}
+//     Order details:
+//     ${firstName}${lastName}
+//     ${qty} * $${price} = $${qty*price} to ${event}
 
-    You can pick up your tickets at will call 30 minutes before the show.
+//     You can pick up your tickets at will call 30 minutes before the show.
 
-    Thanks,
-    ${ticketAgent}    
-    `
-//  }
+//     Thanks,
+//     ${ticketAgent}    
+//     `
 
-console.log(message);
+// console.log()
 
 
-const article = {title: "The Life an Times of a Blogger", body: "One day I was bored so I invented the blog, short for Weblog." } 
+// const article = {title: "The Life an Times of a Blogger", body: "One day I was bored so I invented the blog, short for Weblog." } 
 
-document.body.innerHTML = 
-`
-<section>
-    <header> 
-        <h1> The HTML5 Blog </h1>
-    </header>
-        <article> 
-            <h2> ${article.title}</h2>
-            ${article.body}
-        </article>
-        <footer>
-            <p>copyright ${new Date().getYear()} | The HTML5 Blog </p>
-        <footer>
-</section>
-`
+// document.body.innerHTML = 
+// `
+// <section>
+//     <header> 
+//         <h1> The HTML5 Blog </h1>
+//     </header>
+//         <article> 
+//             <h2> ${article.title}</h2>
+//             ${article.body}
+//         </article>
+//         <footer>
+//             <p>copyright ${new Date().getYear()} | The HTML5 Blog </p>
+//         <footer>
+// </section>
+// `
 
 // function logActivity(name="", activity=""){
 //     console.log(`${name} loves ${favActivity}`)
@@ -128,26 +126,26 @@ document.body.innerHTML =
 //         }
 //         console.log(`${p.name.first} loves ${favActivity}`)        
 //     }
-// console.log(logActivity());
+// console.log(logActivity())
 
 // Arrow functions
 // traditional function
 
-var lordify = function(firstname) {
-    return `${firstName} of Cantebury`
-}
+// var lordify = function(firstname) {
+//     return `${firstName} of Cantebury`
+// }
 
-console.log(lordify("Bubs"))
-console.log(lordify("Bimba"))
+// console.log(lordify("Bubs"))
+// console.log(lordify("Bimba"))
 
-// Using the arrow function => {return value}
-var lordify = firstname => `${firstname} of Cantebury`
-console.log(lordify("Sempliciotto"))
+// // Using the arrow function => {return value}
+// var lordify = firstname => `${firstname} of Cantebury`
+// console.log(lordify("Sempliciotto"))
 
-// New use of Arrow function
-var lordify = (firstName, land) => `${firstName} of ${land}`
-console.log(lordify("Bugs", "Balookaville"))
-console.log(lordify("Pepe Le Piu'", "Parigi"))
+// // New use of Arrow function
+// var lordify = (firstName, land) => `${firstName} of ${land}`
+// console.log(lordify("Bugs", "Balookaville"))
+// console.log(lordify("Pepe Le Piu'", "Parigi"))
 
 // New use of Arrow function
 var _lordify = (firstName, land) => {
@@ -159,19 +157,48 @@ var _lordify = (firstName, land) => {
     }
     return `${firstName} of ${land}`
 }
-console.log(lordify("Bart", "Simpsonville"))
-console.log(lordify("MonAmi", ))
+console.log(_lordify("Dracula", "Transylvania"))
+// console.log(_lordify("MonAmi", ))
 
 // Arrow functions do not block off scope of "this"
 
-var tahoe = {
-    resorts: ["Kirkwood", "Squaw", "Alpine"],
-    print: function(delay=1000) {
+// var tahoe = {
+//     resorts: ["Kirkwood", "Squaw", "Alpine"],
+//     print: function(delay=1000) {
 
-        setTimeout(() => {
-            console.log(this === window)
-            console.log(this.resorts.join(", ")) 
-        }, delay)
-    }
+//         setTimeout(() => {
+//             // this will evaluate to false
+//             console.log(this === window)
+//             console.log(this.resorts.join(", ")) 
+//         }, delay)
+//     }
+// }, 
+// tahoe.print();
+
+// Destructuring: Allows you to locally scope fields in an object and declare which values are used. 
+
+var sandwich = {
+    bread: "Schiacciatella",
+    meat: "Salame",
+    cheese: "Pecorino",
+    toppings: ["lettuga", "pomodori", "senape"]
 }
-tahoe.print();
+
+// destructing in action
+var {bread, meat} = sandwich
+console.log(bread, meat)
+
+// destructure incoming function arguments
+var lordify = regularPerson => {
+    console.log(`${regularPerson.firstname} of Canterbury`)
+}
+
+var regularPerson = {
+    firstname: "Bill",
+    lastname: "Wilson"
+}
+lordify(regularPerson)
+
+// Object literal enhancement: Opposite of Destructuring
+
+var name
