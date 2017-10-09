@@ -280,3 +280,44 @@ var lakes = ["Frog", "Timothy", "Crater"]
 // first and rest are arbitrary variable names
 var [first,...rest] = lakes
 console.log(rest.join(", "))
+
+
+// Using spread operator to collect function arguments as an array.
+// directions function takes in the argument using the spread operator.
+// First argument is assigned to the start variable. The last argument
+// is assigned to finish variable using Array.reverse()...
+// Then use the length of the arguments array to display how many towns passed
+// The number of stops is the length of arguments minus the the finish stop
+
+function directions(...args) {
+    var [start, ...remaining] = args
+    var [finish, ...stops] = remaining.reverse()
+    console.log(`Drive through ${args.length} towns`)
+    console.log(`Start in ${start}`)
+    console.log(`The destination is ${finish}`)
+    console.log(`Stopping ${stops.length} times in between`)
+}
+
+directions(
+    "Portland",
+    "Salem",
+    "Eugene",
+    "Ashland",
+    "Redwood City",
+    "San Francisco"
+)
+
+// Spread operator used for objects
+
+var morning = {
+    breakfast: "oatmeal",
+    lunch: "peanut butter and jelly"
+}
+var dinner = "mac and cheese"
+
+var backpackingMeals = {
+    ...morning, 
+    dinner
+}
+
+console.log(backpackingMeals)
