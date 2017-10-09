@@ -209,6 +209,9 @@ lordify(regularPerson)
 
 
 // NOTE: We use 'this' to access the OBJECT keys.
+// However, 'this' is NOT necessary to access the keys....
+// name and elevation are now keys of the funHike object.
+
 var name = "Hood"
 var elevation = 11250
 var print = function() {
@@ -216,3 +219,64 @@ var print = function() {
 }
 var funHike = {name, elevation, print}
 funHike.print() 
+
+
+// No longer necessary to use 'function' word. 
+
+// OLD 
+// var skier = {
+//     name: name,
+//     sound: sound,
+//     powderYell: function() {
+//         var yell = this.sound.toUpperCase()
+//         console.log(`${yell}${yell}${yell}!!!`)
+//     },
+//     speed: function(mph) {
+//         this.speed = mph
+//         console.log('speed:', mph)
+//     }
+// }
+
+// NEW  ! ERROR
+// Uncaught ReferenceError: sound is not defined....
+// const skier = {
+//     name,
+//     sound,
+//     powderYell() {
+//         let yell = this.sound.toUpperCase()
+//         console.log(`${yell}${yell}${yell}!!!`)
+//     },
+//     speed (mph) {
+//         this.speed = mph
+//         console.log('speed:', mph)
+//     }
+
+// }
+
+// Spread Operator
+// combine two arrays into one array
+
+var peaks = ["Mt. Hood", "Middle Sister", "Broken Top"]
+var canyons = ["Sherars Falls", "Macks Canyon", "Crooked River Canyon"] 
+var peaksAndCanyons = [...peaks,...canyons]
+
+console.log(peaksAndCanyons.join(', '))
+
+// reverse function mutates the array!
+
+var [last] = peaks.reverse()
+console.log(last)
+console.log(peaks.join(', '))
+
+//  However, with a spread operator, you don't have to mutate the array.
+//  Spread operator creates a copy of the array and then reverses it.
+var peaks1 = ["Mt. Hood", "Middle Sister", "Broken Top"]
+var [last1] = [...peaks1].reverse()
+// console.log(last1)
+console.log(peaks1.join(', '))
+
+// Spread operator can be used to get the 'rest' of items in array.
+var lakes = ["Frog", "Timothy", "Crater"]
+// first and rest are arbitrary variable names
+var [first,...rest] = lakes
+console.log(rest.join(", "))
