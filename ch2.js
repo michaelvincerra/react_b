@@ -253,11 +253,10 @@ funHike.print()
 
 // }
 
-// Spread Operator
-// combine two arrays into one array
+// Spread Operator: Combine two arrays into one array
 
 var peaks = ["Mt. Hood", "Middle Sister", "Broken Top"]
-var canyons = ["Sherars Falls", "Macks Canyon", "Crooked River Canyon"] 
+var canyons = ["Owyhee Canyonlands", "Macks Canyon", "Crooked River Gorge"] 
 var peaksAndCanyons = [...peaks,...canyons]
 
 console.log(peaksAndCanyons.join(', '))
@@ -307,7 +306,7 @@ directions(
     "San Francisco"
 )
 
-// Spread operator used for objects
+// Spread operator used for objects to combine two object!
 
 var morning = {
     breakfast: "oatmeal",
@@ -316,8 +315,74 @@ var morning = {
 var dinner = "mac and cheese"
 
 var backpackingMeals = {
+    // take all arguments in morning..., and dinner too!
     ...morning, 
     dinner
 }
 
 console.log(backpackingMeals)
+
+
+// Promises
+// Create an asynchronous promise
+// Thesis: When you call a promise-based asynch function, it returns a Promise instance (see below)
+
+// getFakeMembers creates a promise
+const getFakeMembers = count => new Promise((resolves, rejects) =>{
+    const api = 'https://api.randomuser.me/?nat=US&results=${count}'
+    const request = new XMLHttpRequest()
+    request.open('GET', api)
+    request.onload = ()  =>
+        (request.status === 200) ? 
+        resolves(JSON.parse(request.response).results):
+        reject(Error(request.statusText))
+    request.onerror = (err) => rejects(err)
+    request.send()
+})
+
+//  Now we need to call the promise.
+// 'then' function is used to chain to do something after promise fulfilled. 
+
+getFakeMembers(5).then(
+    members => console.log(members),
+    err => console.error(
+        new Error("cannot load members from randomuse.me")
+    )//Attaches to accept/reject for resolution of promise
+)
+
+// Classes in ES6
+class Vacation {
+    constructor(destination, length){
+        this.destination = destination
+        this.length = length
+    }
+    print() {
+        console.log(`${this.destination} will take ${this.length} days.`)
+    }
+}
+
+// Now create an instance of the class. 
+
+// const trip = new Vacation("Catania, Sicilia", 11); 
+// console.log(trip.print()); 
+
+// Classes can be "extended", and these extensions inherit all props from superclass.
+
+class Expedition extends Vacation {
+    constructor(destination, length, gear) {
+        super(destination, length)
+        this.gear = gear
+    } 
+    print() {
+        super.print()
+        console.log(`Bring your ${this.gear.join(" and your ")}`)
+    }
+}
+// Note: Above ONLY establishes a subclass; won't execute anything
+// Now create an instance of it!
+
+const trip = new Expedition("Cima Catinaccio", 3,
+                ["imbracatura", "scarponi", "impermeabile" , "moschettoni"])
+trip.print()
+
+// ES6 Modules
