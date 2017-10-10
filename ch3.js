@@ -55,3 +55,57 @@ const scream = createScream(message => console.log(message))
 scream('functions can be returned from other functions')
 scream('createScream returns a function')
 scream('scream invokes that returned function')
+
+// Revised to use all arrows =>
+// More than one => means it's a higher order functions
+
+// const createScream = logger => message =>
+//     logger(message.toUpperCase()+ "!!!")
+
+// Declarative vs. Imperative
+// OLD
+
+var string = "This is the tonight show with Jimmy Fallon"
+var urlFriendly = ""; 
+
+for(var i=0; i<string.length; i++){
+    if(string[i] === " "){
+        urlFriendly += "-"; 
+    } else {
+        urlFriendly += string[i];
+    }
+}
+console.log(urlFriendly);
+
+// NEW
+
+const string1 = "This is the tonight show with Jimmy Fallon"
+const urlFriendly1 = string.replace(/ /g, "-")
+console.log(urlFriendly1)
+
+// DOM construction using OLD way, imperative
+
+var target = document.getElementById('target');
+var wrapper = document.createElement('div'); 
+var headline = document.createElement('h1'); 
+
+wrapper.id = "welcome"; 
+headline.innerText = "Hello World";
+
+wrapper.appendChild(headline); 
+target.appendChild(wrapper); 
+
+// REACT method
+// DOM construction using REACT component
+
+const { render } = ReactDOM
+
+const Welcome = () => (
+    <div id="welcome">
+        <h1>Hello World</h1>
+    </div>
+)
+render(
+    <Welcome />,
+    document.getElementById('target')
+)
