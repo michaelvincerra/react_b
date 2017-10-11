@@ -10,8 +10,8 @@
 // NEW
 // Write same function as above with an arrow function
 
-const log = message => console.log(message)
-console.log(`ES6 way to write function: ${log}`)
+// const log = message => console.log(message)
+// console.log(`ES6 way to write function: ${log}`)
 
 // using 'const' prevents it from being overwritten
 const obj = {
@@ -36,25 +36,25 @@ messages[3](messages[2])
 
 // Functions can be sent to other functions as arguments
 
-const insideFn = logger =>
-log("They can be sent to other functions as arguments");
+// const insideFn = logger =>
+// log("They can be sent to other functions as arguments");
 
-insideFn(message => console.log(message))
+// insideFn(message => console.log(message))
 
-// They can be returned from other functions, like variables
+// // They can be returned from other functions, like variables
 
-let createScream = function(logger) {
-    return function(message) {
-        logger(message.toUpperCase() + "!!!")
-    }
-}
+// let createScream = function(logger) {
+//     return function(message) {
+//         logger(message.toUpperCase() + "!!!")
+//     }
+// }
 
 // const scream is passing a function as an argument of createScream!
-const scream = createScream(message => console.log(message))
+// const scream = createScream(message => console.log(message))
 
-scream('functions can be returned from other functions')
-scream('createScream returns a function')
-scream('scream invokes that returned function')
+// scream('functions can be returned from other functions')
+// scream('createScream returns a function')
+// scream('scream invokes that returned function')
 
 // Revised to use all arrows =>
 // More than one => means it's a higher order functions
@@ -402,7 +402,53 @@ const distinctColors = colors1.reduce(
 console.log(distinctColors)
 
 // Add more examples of map() and reduce()!!!
+// 
 
+
+// HIGHER ORDER FUNCTIONS
+// Functions that can manipulate other functions.
+// * When the 'condition' is true, showWelcome is invoked; when the 'condition' is false, showUnauthorized is invoked.
+// 'Currying' is the practice of holding onto some values needed to complete an operationuntil the rest can be supplied at a later point in time.
+
+const invokeIf = (condition, fnTrue, fnFalse) =>
+    (condition) ? fnTrue() : fnFalse()
+
+const showWelcome = () =>
+    console.log("Welcome!")
+
+const showUnauthorized = () =>
+    console.log("Unauthorized!")
+
+invokeIf(true, showWelcome, showUnauthorized)
+invokeIf(false, showWelcome, showUnauthorized)
+ 
+// Another examples of 'currying' that holds onto a value (username)
+// and returns a function that can be used/reused when the (message) is made available.
+
+const getFakeMembers = count => new Promise((resolves, rejects) =>{
+    const api = 'https://api.randomuser.me/?nat=US&results=${count}'
+    const request = new XMLHttpRequest()
+    request.open('GET', api)
+    request.onload = ()  =>
+        (request.status === 200) ? 
+        resolves(JSON.parse(request.response).results):
+        reject(Error(request.statusText))
+    request.onerror = (err) => rejects(err)
+    request.send()
+})
+
+
+
+const userLogs = userName => message =>
+    console.log(`${userName} -> ${message}`)
+
+const log = userLogs("grandpa23")
+
+log("attempted to load 20 fake members")
+getFakeMembers(20).then(
+    members => log(`successfully loaded ${members.length} members.`),
+    error => log("encountered an error loading members")
+)
 
 
 
