@@ -226,3 +226,188 @@ Header("Header() caused side effects");
 
 // const Header = (props) => <h1>{props.title}</h1>
 //In the HTML, you must add for it to run: <script type="text/jsx">
+
+// DATA TRANSFORMATIONS
+
+// ** MASTER these three core functions: Array.map(); Array.reduce(); Array.filer()
+
+const schools = [
+    "Yorktown",
+    "Washington & Lee",
+    "Wakefield"
+]
+console.log(schools.join(", "))
+
+// Note: ... .filter(school => school[0]) === "W" is interpreted as:
+// return value if school/iterator returns school[0] at first index position that stars with a "W"
+// Array.filter() is IMMUTABLE: it produces a NEW array
+// Syntax of .filter(...) is similar to LIST COMP in Python
+// school here is called the 'predicate'; it always returns a Boolean value
+const wSchools = schools.filter(school => school[0] === "W")
+console.log(wSchools)
+
+const cutSchool = (cut, list) => 
+    list.filter(school => school !== cut)
+
+console.log(cutSchool("Washington & Lee", schools).join(" * "))    
+// \n = new line
+console.log(schools.join("\n"))
+
+// Array.map
+// IMMUTABLE
+// Array.map takes one function as its argument
+// this function is invoked for every item in the array, and whatever it returns is added to the array
+
+const highSchools = schools.map(school => `${school} High School`)
+console.log(highSchools.join("\n"))
+console.log(schools)
+
+// Array.map can also produce an array of objects, values, arrays, other functions....
+// Example that produces object for each school
+
+const highSchools1 = schools.map(school => ({name: school}))
+
+console.log(highSchools1)
+console.log(highSchools1[2]) // Can also call  by index position
+
+let schools1 = [
+    {name: "Yorktwon"},
+    {name: "Stratford"},
+    {name: "Washington & Lee"},
+    {name: "Wakefield"},
+]
+// NOTE: editName is undefined 
+// let updatedSchools = editName("Stratford", "HB Woodlawn", schools1)
+
+// console.log(updatedSchools[1])
+// console.log(schools1[1])
+
+
+
+const editName = (oldName, name, arr) =>
+    arr.map(item => {
+        if(item.name === oldName) {
+            return {
+                ...item,
+                name
+            }
+        }else{
+            return item
+        }
+    })
+
+// editName function rewritten as ternary function
+
+const editName1 = (oldName, name, arr) =>
+    arr.map( item =>
+        (item.name === oldName) ?
+        ({...item, name}) :
+        item
+)
+console.log(editName("Stratford", "WB Woodlawn", schools1))
+
+
+// Combine: Array.map & Object.keys 
+// Transform schools object into an array of schools
+
+const schools2 = {
+    "Yorktown": 10,
+    "Washington & Lee": 2 ,
+    "Wakefield": 5,
+}
+
+const schoolArray = Object.keys(schools2).map(key =>
+    ({
+      name: key, 
+      wins: schools2[key]  
+    })
+)
+console.log(schoolArray)
+console.log(Object.keys(schools2))  // Keys are now string Keys, with values as numbers
+
+// reduce, reduceRight -- used to transform an array into a VALUE, including number, string, value, object, function....
+
+const ages = [21,18,42,40,64,63,34];
+
+const maxAge = ages.reduce((max, age) => {
+    console.log(`${age} > ${max} = ${age > max}`);
+    if (age > max) {
+        return age
+    } else {
+        return max
+    }
+ }, 0
+)
+
+console.log('maxAge', maxAge)
+
+// NOTES:
+// ages array is reduced to a single value: max: 64. 
+// reduce takes two arguments(callback function, original value)
+// original value is set to '0' above
+// Callback is invoked once for every item in the array
+// Callback returns the GREATER of the  two numbers
+ // 21 > 0
+ // 18 > 21
+
+ // Revise above formula as ternary:
+
+ const max = ages.reduce(
+     (max, value) => (value > max) ? value: max,
+     0
+ )
+ console.log(`maxAge as ternary`, max)
+
+const colors = [
+    {   id: '-xekare',
+        title: "rad red",
+        rating: 3,
+      }, 
+      {
+        id: '-jbwsof',
+        title: "big blue",
+        rating: 2,      },
+       {
+        id: '-prigbj',
+        title: "grizzly gray",
+        rating: 5,
+       } ,
+       {
+        id: '-ryhbhsl',
+        title: "banana",
+        rating: 1,
+       }
+    ]
+const hashColors = colors.reduce(
+    (hash, {id, title, rating}) => {
+        hash[id] = {title, rating}
+        return hash
+    },
+    {}
+    // The second argument is an empty object, sent to reduce function: It is the initial value for the hash
+)
+console.log(hashColors)
+    
+// Transform arrays into completely different arrays with reduce
+
+const colors1 = ["red", "red", "green", "blue", "green"];
+
+const distinctColors = colors1.reduce(
+    (distinct, color) =>
+        (distinct.indexOf(color) !== -1) ?
+        distinct:
+        [...distinct, color],
+        [] // This empty array is the initial value for 'distinct'
+)
+console.log(distinctColors)
+
+// Add more examples of map() and reduce()!!!
+
+
+
+
+
+
+
+
+
