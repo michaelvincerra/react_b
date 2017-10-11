@@ -320,9 +320,19 @@ const schoolArray = Object.keys(schools2).map(key =>
     })
 )
 console.log(schoolArray)
-console.log(Object.keys(schools2))  // Keys are now string Keys, with values as numbers
+// Keys are now string Keys, with values as numbers
+console.log(Object.keys(schools2))  
 
-// reduce, reduceRight -- used to transform an array into a VALUE, including number, string, value, object, function....
+// reduce, reduceRight -- 
+// Transform an array into a VALUE, including number, string, value, object, function....
+// " The reduce() method applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value."
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce?v=a
+
+const total = [0,1,2,4].reduce(function(sum,value){
+    return sum + value;
+}, 0 );                 // What are use cases in which you want starting number to be > 0? 
+console.log(`total is:`, total)
+
 
 const ages = [21,18,42,40,64,63,34];
 
@@ -430,6 +440,12 @@ let evenArray = arr.filter((num) => {
 console.log(evenArray)
 console.log(arr)
 
+let word = ["damnation", "disaster", "deluge", "destruction", "dystopia", "debacle", "debauchery", "dinamo"]
+
+let longerWords = word.filter(word => word.length > 6);
+console.log(`Words with more than 6 letters:`, longerWords)
+
+
 
 
 // HIGHER ORDER FUNCTIONS
@@ -478,7 +494,26 @@ getFakeMembers(20).then(
 )
 
 // RECURSION
+// a function that calls itself
 
+const countdown = (value, fn) => {
+    fn(value)
+    return (value > 0) ? countdown(value -1, fn) : value
+}
+// It's invoked with value of 10, and a callback function
+countdown(10, value => console.log(value))
+
+
+// Revised above to pass argument of 'delay'
+const countdown1 = (value, fn, delay=1000) => {
+    fn(value)
+    return (value > 0) ? 
+        setTimeout(() => countdown1(value -1, fn), delay) 
+        : value
+}
+
+const log3 = value => console.log(value)
+countdown1(10, log3);
 
 
 
