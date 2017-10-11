@@ -167,7 +167,7 @@ let list = [
 
 // Revise above formula using instead: Array.concat
 
-const addColor = (title, array) =>array.concat({title})
+const addColor = (title, array) => array.concat({title})
 console.log(addColor("Glam Silver", list).length)
 console.log(list.length)
 
@@ -202,7 +202,7 @@ const frederick = {
 }
 
 const selfEducate = person =>
-    // Note: () must appear because these always follow => notation
+    // Note: () must appear after => notation
     ({
        ...person, 
        canRead: true,
@@ -229,7 +229,7 @@ Header("Header() caused side effects");
 
 // DATA TRANSFORMATIONS
 
-// ** MASTER these three core functions: Array.map(); Array.reduce(); Array.filer()
+// ** MASTER these three core functions: Array.map(); Array.reduce(); Array.filter()
 
 const schools = [
     "Yorktown",
@@ -299,10 +299,7 @@ const editName = (oldName, name, arr) =>
 // editName function rewritten as ternary function
 
 const editName1 = (oldName, name, arr) =>
-    arr.map( item =>
-        (item.name === oldName) ?
-        ({...item, name}) :
-        item
+    arr.map( item => (item.name === oldName) ? ({...item, name}) : item
 )
 console.log(editName("Stratford", "WB Woodlawn", schools1))
 
@@ -402,7 +399,37 @@ const distinctColors = colors1.reduce(
 console.log(distinctColors)
 
 // Add more examples of map() and reduce()!!!
-// 
+
+// Filter examples
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+
+// OLD WAY
+
+function isEven(number) {
+    if (x = number % 2 === 0)
+        return x 
+}
+console.log(`Is the number even?:`, isEven(2))
+
+function isOdd(number) {
+    if(y = number % 2 === 1)
+    return y
+}
+console.log(`Is the number odd?:`, isOdd(3))
+console.log(`Is the number odd?:`, isOdd(300033391))
+
+// NEW WAY
+// Filter returns a NEW array; does not mutate original array
+
+const arr = [1,2,3,4,5,6,7,8,9,10,11,12];
+// let evenArray = arr.filter(function(num) {    
+let evenArray = arr.filter((num) => {
+    return num % 2 === 0;
+});
+
+console.log(evenArray)
+console.log(arr)
+
 
 
 // HIGHER ORDER FUNCTIONS
@@ -450,7 +477,7 @@ getFakeMembers(20).then(
     error => log("encountered an error loading members")
 )
 
-
+// RECURSION
 
 
 
