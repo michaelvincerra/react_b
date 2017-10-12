@@ -338,9 +338,13 @@ const ages = [21,18,42,40,64,63,34];
 
 const maxAge = ages.reduce((max, age) => {
     console.log(`${age} > ${max} = ${age > max}`);
+    // Whatever value is returned becomes the new max
     if (age > max) {
+        console.log(max, age)
+        // sets max to age
         return age
     } else {
+        // sets max to max
         return max
     }
  }, 0
@@ -421,6 +425,15 @@ function isEven(number) {
 }
 console.log(`Is the number even?:`, isEven(2))
 
+function hurryUp() { 
+    let y = isEven(120)
+    console.log(y)
+}
+
+p = hurryUp()
+
+
+
 function isOdd(number) {
     if(y = number % 2 === 1)
     return y
@@ -434,6 +447,7 @@ console.log(`Is the number odd?:`, isOdd(300033391))
 const arr = [1,2,3,4,5,6,7,8,9,10,11,12];
 // let evenArray = arr.filter(function(num) {    
 let evenArray = arr.filter((num) => {
+    // Boolean evaluates; if true, it adds it to the new array; otherwise, not. 
     return num % 2 === 0;
 });
 
@@ -442,11 +456,8 @@ console.log(arr)
 
 let word = ["damnation", "disaster", "deluge", "destruction", "dystopia", "debacle", "debauchery", "dinamo"]
 
-let longerWords = word.filter(word => word.length > 6);
+let longerWords = word.filter(worm => worm.length > 6);
 console.log(`Words with more than 6 letters:`, longerWords)
-
-
-
 
 // HIGHER ORDER FUNCTIONS
 // Functions that can manipulate other functions.
@@ -518,13 +529,10 @@ countdown1(10, log3);
 // Use of RECURSION to find nested value
 const deepPick = (fields, object={}) => {
     const [first, ...remaining] = fields.split(".")
-    return (remaining.length) ?
-    deepPick(remaining.join("."), object[first])
-    :
-    object[first]
+    // ternary
+    return (remaining.length) ? deepPick(remaining.join("."), object[first]) : object[first]
 }
 
-console.log()
 
 let xlr123 = {
     type: "person",
@@ -541,7 +549,7 @@ let xlr123 = {
 }
 
 console.log(deepPick("type", xlr123))
-console.log("data.info.fullname.first", xlr123)
+console.log(deepPick("data.info.fullname.first", xlr123))
 
 // COMPOSITION
 // Functions can be chained together using dot notation to act on the return value of the previous function. 
