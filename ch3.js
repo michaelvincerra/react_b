@@ -14,14 +14,14 @@
 // console.log(`ES6 way to write function: ${log}`)
 
 // using 'const' prevents it from being overwritten
-const obj = {
-    message: "They can be added to objects like variables", 
-    log(message){
-        console.log(message)
-    }
-}
+// const obj = {
+//     message: "They can be added to objects like variables", 
+//     log(message){
+//         console.log(message)
+//     }
+// }
 // Note the use of dot notation on object
-obj.log(obj.message)
+// obj.log(obj.message)
 
 // Add functions to Arrays
 const messages = [
@@ -482,26 +482,26 @@ const getFakeMembers = count => new Promise((resolves, rejects) =>{
 
 
 
-const userLogs = userName => message =>
-    console.log(`${userName} -> ${message}`)
+// const userLogs = userName => message =>
+//     console.log(`${userName} -> ${message}`)
 
-const log = userLogs("grandpa23")
+// const log = userLogs("grandpa23")
 
-log("attempted to load 20 fake members")
-getFakeMembers(20).then(
-    members => log(`successfully loaded ${members.length} members.`),
-    error => log("encountered an error loading members")
-)
+// log("attempted to load 20 fake members")
+// getFakeMembers(20).then(
+//     members => log(`successfully loaded ${members.length} members.`),
+//     error => log("encountered an error loading members")
+// )
 
 // RECURSION
 // a function that calls itself
 
-const countdown = (value, fn) => {
-    fn(value)
-    return (value > 0) ? countdown(value -1, fn) : value
-}
+// const countdown = (value, fn) => {
+//     fn(value)
+//     return (value > 0) ? countdown(value -1, fn) : value
+// }
 // It's invoked with value of 10, and a callback function
-countdown(10, value => console.log(value))
+// countdown(10, value => console.log(value))
 
 
 // Revised above to pass argument of 'delay'
@@ -515,7 +515,141 @@ const countdown1 = (value, fn, delay=1000) => {
 const log3 = value => console.log(value)
 countdown1(10, log3);
 
+// Use of RECURSION to find nested value
+const deepPick = (fields, object={}) => {
+    const [first, ...remaining] = fields.split(".")
+    return (remaining.length) ?
+    deepPick(remaining.join("."), object[first])
+    :
+    object[first]
+}
 
+console.log()
 
+let xlr123 = {
+    type: "person",
+    data: {
+        gender: "male",
+        info: {
+            id: 22,
+            fullname: {
+                first:"Dan",
+                last: "Beacon",
+            }
+        }
+    }
+}
 
+console.log(deepPick("type", xlr123))
+console.log("data.info.fullname.first", xlr123)
 
+// COMPOSITION
+// Functions can be chained together using dot notation to act on the return value of the previous function. 
+// Goal: Generate a higher-order function by combining simpler functions.
+
+const template = "hh:mm:ss tt"
+const clockTime = template.replace("hh", "03")
+    .replace("mm", "33")
+    .replace("ss", "33")
+    .replace("tt", "PM")
+
+ console.log(clockTime)
+
+ // BAD; HARD to decipher, test
+//  const both = date => appnedAMPM(civilianHours(date))
+ 
+ // GOOD
+ // Easy to scale
+ // Easy to add more functions
+
+ // spread operator used to turn function arguments into an array called 'fns'
+ const compose = (...fns) =>
+    (arg) =>
+    fns.reduce(
+        (composed, f) => f(composed),
+        arg
+    )
+
+//  const both = compose(
+//      civilianHours,
+//      appendAMPM
+//  )
+//  console.log(both(new Date()))
+
+// Build a clock using functional techniques learned.
+
+const oneSecond = () => 1000
+const getCurrentTime = () => new Date()
+const clear = () => console.clear()
+const log = message => console.log(message)
+
+const serializeClockTime = date =>
+({
+    hours: date.getHours(),
+    minutes: date.getMinutes(),
+    seconds: date.getSeconds()
+})
+
+const civilianHours = clockTime =>
+({
+    ...clockTime,
+    hours: (clockTime.hours > 12) ?
+    clockTime.hours - 12 
+    :
+    clockTime.hours
+})
+
+const appendAMPM = clockTime =>
+({
+    ...clockTime,
+    ampm: (clockTime.hours >= 12) ? "PM" : "AM"
+})
+
+const display = target => time => target(time)
+
+const formatClock = format =>
+    time =>
+        format.replace("hh", time.hours)
+            .replace("mm", time.minutes)
+            .replace("ss", time.seconds)
+            .replace("tt", time.ampm)
+
+const prependZero = key => clockTime =>
+({
+    ...clockTime,
+    [key]: (clockTime[key]<10) ?
+    "0" + clockTime[key] 
+    :
+    clockTime[key]
+})
+
+// Start the clock:  startTicking()
+
+const convertToCivilianTime = clockTime =>
+    compose(
+        appendAMPM,
+        civilianHours
+    )(clockTime)
+
+const doubleDigits = civilianTime =>
+    compose(
+        prependZero("hours"),
+        prependZero("minutes"),
+        prependZero("seconds")
+    )(civilianTime)
+    
+const startTicking = () =>
+    setInterval(
+    compose(   
+        clear,
+        getCurrentTime,
+        serializeClockTime,
+        convertToCivilianTime,
+        doubleDigits,
+        formatClock("hh:mm:ss tt"),
+        display(log)
+    ),
+        oneSecond()
+)
+
+// console.log(startTicking())
