@@ -1,4 +1,4 @@
-// import React, { Component } from 'react'
+import React, { Component } from 'react'
 // ch4: Pure React
 // React: library for creating views  [...remember: m-V-t]
 // ReactDOM: library used to render UI in browser
@@ -31,15 +31,7 @@ console.log('dish', dish)
 //         React.createElement("li", {key: i}, ingredient)
 //     ))
 
-let items = [
-    "1 lb. Salmon",
-    "1 cup Pine Nuts",
-    "2 cups Butter Lettuce",
-    "1 Yellow Squash",
-    "1/2 cup of Olive Oil",
-    "3 cloves of garlic",    
-]
-// Restart at 
+//  
 // const IngredientsList = React.createClass({
 //     displayName: "IngredientsList",
 //     renderListItem(ingredient, i) {
@@ -51,3 +43,22 @@ let items = [
 //       )
 //     }
 //   })
+
+let ingredient = [
+    "1 lb. Salmon",
+    "1 cup Pine Nuts",
+    "2 cups Butter Lettuce",
+    "1 Yellow Squash",
+    "1/2 cup of Olive Oil",
+    "3 cloves of garlic",    
+]
+
+// Stateless functional components are functions 
+// that take in properties (props) and return a DOM element
+
+const ingredientList = props =>
+    React.createElement("ul", {className: "ingredients"}, 
+        props.items.map((ingredient, i) =>
+            React.createElement("li", {key: i}, ingredient)
+    )
+)
