@@ -1,6 +1,8 @@
-
+/**
+ * @jsx React.DOM
+ */
 // data is an array of recipe objects
-var data = [
+let data = [
     {
     "name": "Baked Salmon", 
     "ingredients": [
@@ -35,7 +37,7 @@ var data = [
         "Top them with lettuce, tomatoes, and cheese.", 
         ]
     }
-    ];
+]
 
 // A stateless functional Component for an INDIVIDUAL RECIPE. 
 const Recipe = ({name, ingredients, steps})  => 
@@ -43,19 +45,17 @@ const Recipe = ({name, ingredients, steps})  =>
         <h1> {name}</h1>
         <ul className="ingredients">
             {ingredients.map((ingredient, i) =>
-                <li key={i}>{ingredient.name}</li>
-                )}
+                <li key={i}> {ingredient.name} </li>
+            )}
         </ul>
+
         <section className="instructions"> 
             <h2> Cooking Instructions </h2>
             {steps.map((step, i) =>
-                <p key={i}>{step}></p>
+                <p key={i}> {step} </p>
             )}        
         </section>        
     </section>
-
-
-
 
 // A stateless functional component for the MENU of recipes. 
 // Explain how removal of '(props)' argument enables use to remove 'props' below?
@@ -65,20 +65,19 @@ const Menu = ({title, recipes})  =>
             <h1>{title}</h1>
         </header>
         <div className="recipes">
-            {recipes.map((recipe,i) =>
+            {recipes.map((recipe, i) =>
             // Uses spread operator to include all
-            <Recipe key={i} {...recipe}/>
-                {/* ingredients={recipe.ingredients}
-                steps={recipe.steps} */}
+            <Recipe key={i} {...recipe} />
+            /* ingredients={recipe.ingredients}
+                steps={recipe.steps} */
             )}
         </div>
     </article>    
 
-
-
 // A call to React.DOM.render to render our MENU into the current DOM
-React.DOM.render(
-    <Menu recipes={data} title="Delicious Recipes" />,
+ReactDOM.render(
+    <Menu recipes={data}    
+        title="Delicious Recipes" />,
     document.getElementById("react-container")
 )
 
