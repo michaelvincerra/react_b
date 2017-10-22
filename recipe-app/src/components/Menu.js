@@ -1,10 +1,10 @@
 import Recipe from './Recipe'
 import '../../stylesheets/Menu.css'
 
-const Menu = ({recipes})  => 
+const Menu = ({title, recipes})  => 
 <article>
     <header>
-        <h1> Delicous Recipes</h1>
+        <h1> Delicious Recipes</h1>
     </header>
 
     <div className="recipes">
