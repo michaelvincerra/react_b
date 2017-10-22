@@ -1,13 +1,15 @@
-import IngredientList from './IngredientList'
+import IngredientsList from './IngredientsList'
 import Instructions from './Instructions'
 
 
 const Recipe = ({name, ingredients, steps})  => 
 <section id={name.toLowerCase().replace(/ /g, "-")}>
     <h1> {name}</h1>
-    <IngredientList list={ingredients}/>
+    <IngredientsList list={ingredients}/>
     <Instructions title="Cooking Instructions"
-        stesps={steps} />
+        steps={steps} />
 </section>
+
+Recipe.displayName = 'Recipe'
 
 export default Recipe

@@ -346,7 +346,7 @@ const getFakeMembers = count => new Promise((resolves, rejects) =>{
 getFakeMembers(5).then(
     members => console.log(members),
     err => console.error(
-        new Error("cannot load members from randomuse.me")
+        new Error("cannot load members from randomuser.me")
     )//Attaches to accept/reject for resolution of promise
 )
 
